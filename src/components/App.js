@@ -9,33 +9,29 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState('');
+  const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
 
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true)
-    console.log('avatar')
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true)
-    console.log('profile')
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen(true)
-    console.log('place')
+    setIsAddPlacePopupOpen(true);
   }
 
   function handleCardClick(card) {
-    setSelectedCard(card)
-    console.log('selected-card')
+    setSelectedCard(card);
   }
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard('');
+    setSelectedCard({ name: '', link: '' });
   }
 
   return (
