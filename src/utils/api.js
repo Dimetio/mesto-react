@@ -76,8 +76,14 @@ class Api {
       .then(this._getResponseData)
   }
 
-  changeLikeCardStatus(card, isLiked) {
-    isLiked ? this.likeCard(card) : this.dislikeCard(card);
+  changeLikeCardStatus(id, isLiked) {
+    if(isLiked) {
+      return this.likeCard(id)
+    } else {
+      return this.dislikeCard(id)
+    }
+    //isLiked ? this.likeCard(id) : this.dislikeCard(id);
+    // не пойму почему выдает ошибку, когда тернарка
   }
 
   setAvatar(avatar) {

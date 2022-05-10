@@ -12,15 +12,17 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
-  const [currentUser, setCurrentUser] = useState();
+ 
+  const [currentUser, setCurrentUser] = useState({});
 
   React.useEffect(() => {
     api.getUserInfo()
-      .then(res => {
-        console.log(res)
-        //setCurrentUser(res)
+      .then(userInfo => {
+        console.log(userInfo)
+        setCurrentUser(userInfo)
       })
-  });
+      .catch(err => console.log(err));
+  }, []);
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);

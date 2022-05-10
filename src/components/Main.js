@@ -6,7 +6,7 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 import button from '../images/add_btn.svg';
 
 
-export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardDelete }) {
+export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [cards, setCards] = React.useState([]);
 
@@ -20,10 +20,9 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    api.changeLikeCardStatus(card._id, !isLiked)
-      .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
   }
 
@@ -41,12 +40,12 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
           <div
             onClick={onEditAvatar}
             className="avatar profile-info__avatar"
-            style={{ backgroundImage: `url(${currentUser.userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           ></div>
 
           <div className="profile-info__content">
             <div className="profile-info__content-wrap">
-              <h1 className="profile-info__name">{currentUser.userName || ''}</h1>
+              <h1 className="profile-info__name">{currentUser.name}</h1>
 
               <button
                 onClick={onEditProfile}
@@ -55,7 +54,7 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
               ></button>
             </div>
 
-            <p className="profile-info__about">{currentUser.userDescription || ''}</p>
+            <p className="profile-info__about">{currentUser.about}</p>
           </div>
         </div>
 
