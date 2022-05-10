@@ -1,16 +1,29 @@
 import React from 'react';
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
 import iTrash from '../images/trash.svg';
 
-export default function Card({ card, onCardClick }) {
-  const [islike, setIsLike] = React.useState(false);
+export default function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = (
+    `card__img-trash ${isOwn ? 'card__img-trash-visible' : ''}`
+  );
 
+  const [islike, setIsLike] = React.useState(
+    card.likes.some(i => i._id === currentUser._id)
+  );
   function handleCardClick() {
     onCardClick(card);
   }
 
-  function likeClick() {
+  function handleLikeClick() {
     setIsLike(!islike);
+    onCardLike(card)
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(card)
   }
 
   return (
@@ -18,7 +31,8 @@ export default function Card({ card, onCardClick }) {
       <img
         src={iTrash}
         alt="корзина"
-        className="card__img-trash"
+        className={cardDeleteButtonClassName}
+        onClick={handleDeleteClick}
       />
 
       <div 
@@ -38,7 +52,7 @@ export default function Card({ card, onCardClick }) {
           <button
             type="button"
             className={`card__like ${islike && "card__like_active"}`}
-            onClick={likeClick}
+            onClick={handleLikeClick}
           ></button>
           <span className="card__like-counter">{card.likes.length}</span>
         </div>
