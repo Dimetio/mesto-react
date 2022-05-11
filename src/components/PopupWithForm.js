@@ -5,7 +5,6 @@ export default function PopupWithForm({ name, title, children, buttonText, isOpe
         <form
           className="popup__form"
           name={name}
-          noValidate
           onSubmit={onSubmit}
         >
           <h3
