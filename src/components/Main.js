@@ -6,32 +6,8 @@ import CurrentUserContext from '../contexts/CurrentUserContext';
 import button from '../images/add_btn.svg';
 
 
-export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
+export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick, cards, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    Promise.all([api.getCards()])
-      .then(([cardList]) => {
-        setCards(cardList);
-      })
-      .catch(err => console.log(err));
-  }, []);
-
-  function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-  }
-
-  function handleCardDelete(card) {
-    api.deleteCard(card._id)
-      .then((newCard) => {
-        setCards((state) => state.filter((c) => (c._id === card._id ? "" : newCard)))
-      })
-  }
 
   return (
     <main className="main">
@@ -70,8 +46,8 @@ export default function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardCl
               card={card}
               key={card._id}
               onCardClick={onCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))
         }
