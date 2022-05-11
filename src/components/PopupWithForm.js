@@ -1,4 +1,4 @@
-export default function PopupWithForm({ name, title, children, buttonText, isOpen, onClose }) {
+export default function PopupWithForm({ name, title, children, buttonText, isOpen, onClose, onSubmit }) {
   return (
     <div className={`popup ${name} ${isOpen && "popup_opened"}`}>
       <div className="popup__container">
@@ -6,6 +6,7 @@ export default function PopupWithForm({ name, title, children, buttonText, isOpe
           className="popup__form"
           name={name}
           noValidate
+          onSubmit={onSubmit}
         >
           <h3
             className="popup__title">
