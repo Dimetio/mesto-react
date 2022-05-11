@@ -14,6 +14,10 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       .finally(() => setButtonText('Сохранить'));
   }
 
+  React.useEffect(() => {
+    avatarRef.current.value = '';
+  }, [isOpen]);
+
   return (
     <PopupWithForm
       name="popup-avatar"
