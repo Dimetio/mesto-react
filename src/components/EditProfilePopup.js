@@ -6,6 +6,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const currentUser = React.useContext(CurrentUserContext);
+  const [buttonText, setButtonText] = React.useState('Сохранить');
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -22,18 +23,21 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    setButtonText('Сохранение...');
     onUpdateUser({
       name,
       about: description,
     })
+      .then(() => onClose())
+      .catch(err => console.log(err))
+      .finally(() => setButtonText('Сохранить'));
   }
 
   return (
     <PopupWithForm
       name="popup-edit"
       title="Ретактировать профиль"
-      buttonText="Сохранить"
+      buttonText={buttonText}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
