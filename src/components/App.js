@@ -89,6 +89,7 @@ function App() {
       .then((newCard) => {
         setCards((state) => state.filter((c) => (c._id === card._id ? "" : newCard)))
       })
+      .catch(err => console.log(err));
   }
 
   return (
