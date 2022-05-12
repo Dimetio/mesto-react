@@ -26,4 +26,4 @@
 * Вынесены поп-апы в свои компоненты (EditProfilePopup, EditAvatarPopup, AddPlacePopup)
 * Опробваны два способа работы - управляемые компоненты, так и Ref
 
-#### Посмотреть проект на [GitHub Pages](https://dimetio.github.io/mesto-react)
+#### Посмотреть проект на [GitHub Pages](https://dimetio.github.io/mesto-react/)
